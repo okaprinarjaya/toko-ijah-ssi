@@ -2,7 +2,6 @@ package item
 
 import (
     "database/sql"
-    _ "github.com/mattn/go-sqlite3"
     "errors"
     "mypkgcommon"
 )
