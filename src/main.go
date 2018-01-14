@@ -10,7 +10,9 @@ import (
 func initializeRoutes() *mux.Router {
     r := mux.NewRouter()
     r.HandleFunc("/items", items.GetItems).Methods("GET")
-    r.HandleFunc("/transactions/create", transactions.CreateTransaction).Methods("POST")
+    r.HandleFunc("/transactions", transactions.CreateTransaction).Methods("POST")
+    r.HandleFunc("/transactions", transactions.ListTransactions).Methods("GET")
+    r.HandleFunc("/transactions/detail/{trxCode}", transactions.ListTransactionDetails).Methods("GET")
     return r
 }
 

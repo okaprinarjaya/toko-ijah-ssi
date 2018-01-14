@@ -91,3 +91,53 @@ func createDetails(db *sql.DB, trxCode string, trxDetail [] TransactionDetail) (
 
     return result, nil
 }
+
+func (trx *Transaction) GetTransactions(db *sql.DB, trxType string) ([] Transaction, error)  {
+    rows, err := db.Query(
+        "SELECT trx_id, trx_type, notes, created, updated FROM transactions WHERE trx_type = $1",
+        trxType)
+
+    if err != nil {
+        return nil, err
+    }
+
+    defer rows.Close()
+
+    var transactions [] Transaction
+    for rows.Next() {
+        var trx Transaction
+        err := rows.Scan(&trx.TrxId, &trx.TrxType, &trx.Notes, &trx.Created, &trx.Updated)
+        if err != nil {
+            return nil, err
+        }
+
+        transactions = append(transactions, trx)
+    }
+
+    return transactions, nil
+}
+
+func (trxDetails *TransactionDetail) GetTransactionDetails(db *sql.DB, trxCode string) ([] TransactionDetail, error)  {
+    rows, err := db.Query("SELECT id, trx_id, sku, quantity, notes FROM transactions_details " +
+        "WHERE trx_id = $1",
+        trxCode)
+
+    if err != nil {
+        return nil, err
+    }
+
+    defer rows.Close()
+
+    var trxDetailItems [] TransactionDetail
+    for rows.Next() {
+        var trxItem TransactionDetail
+        err := rows.Scan(&trxItem.Id, &trxItem.TrxId, &trxItem.Sku, &trxItem.Quantity, &trxItem.Notes)
+        if err != nil {
+            return nil, err
+        }
+
+        trxDetailItems = append(trxDetailItems, trxItem)
+    }
+
+    return trxDetailItems, nil
+}
