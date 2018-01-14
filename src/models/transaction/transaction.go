@@ -51,14 +51,14 @@ func (trx *Transaction) Create(db *sql.DB) (sql.Result, error) {
         return nil, err
     }
 
-    uniqueCode := trx.TrxType + "-" + common.CreateUniqueChars()
-    _, err = stmt.Exec(uniqueCode, trx.TrxType, trx.Notes)
+    trxCode := trx.TrxType + "-" + common.CreateUniqueChars()
+    _, err = stmt.Exec(trxCode, trx.TrxType, trx.Notes)
 
     if err != nil {
         return nil, err
     }
 
-    result, err := createDetails(db, trx.TrxDetail)
+    result, err := createDetails(db, trxCode, trx.TrxDetail)
 
     if err != nil {
         return nil, err
@@ -67,13 +67,13 @@ func (trx *Transaction) Create(db *sql.DB) (sql.Result, error) {
     return result, nil
 }
 
-func createDetails(db *sql.DB, trxDetail [] TransactionDetail) (sql.Result, error) {
+func createDetails(db *sql.DB, trxCode string, trxDetail [] TransactionDetail) (sql.Result, error) {
     sqlStr := "INSERT INTO transactions_details (trx_id, sku, quantity, notes) VALUES "
     var values [] interface{}
 
     for _, trxItem := range trxDetail {
         sqlStr += "(?,?,?,?),"
-        values = append(values, trxItem.TrxId, trxItem.Sku, trxItem.Quantity, trxItem.Notes)
+        values = append(values, trxCode, trxItem.Sku, trxItem.Quantity, trxItem.Notes)
     }
 
     sqlStr = strings.TrimSuffix(sqlStr, ",")

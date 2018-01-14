@@ -44,9 +44,9 @@ func GetTimestamp() int64 {
 func CreateUniqueChars() string {
     millisStr := strconv.FormatInt(GetTimestamp(), 10)
     last3Char := millisStr[len(millisStr)-3:]
-    one, _ := strconv.Atoi(last3Char[0:0])
-    two, _ := strconv.Atoi(last3Char[0:1])
-    three, _ := strconv.Atoi(last3Char[0:3])
+    one, _ := strconv.Atoi(last3Char[0:1])
+    two, _ := strconv.Atoi(last3Char[1:2])
+    three, _ := strconv.Atoi(last3Char[2:3])
 
     hasher := md5.New()
     hasher.Write([] byte(millisStr))
