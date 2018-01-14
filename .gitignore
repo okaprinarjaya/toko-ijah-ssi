@@ -1,2 +1,4 @@
 pkg/*
 .idea/
+src/github.com/*
+tokoijah.db
