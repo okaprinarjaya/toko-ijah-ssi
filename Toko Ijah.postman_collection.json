@@ -1,0 +1,111 @@
+{
+	"info": {
+		"name": "Toko Ijah",
+		"_postman_id": "49e0d986-af9f-93b6-b6a9-d6d8e1c2c8be",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Master Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"trx_type\": \"TRX-IN\",\n\t\"notes\": \"Tolong ini barang dijaga dengan baik ya, dan jangan pisah-pisahkan mereka, nanti mereka sedih.. T_T\",\n\t\"trx_detail\": [\n\t\t{\n\t\t\t\"sku\": \"SSI-D00791015-LL-BWH\",\n\t\t\t\"price_buy\": 1000,\n\t\t\t\"price_sale\": 1500,\n\t\t\t\"order_quantity\": 5,\n\t\t\t\"receive_quantity\": 5,\n\t\t\t\"quantity_out\": 0,\n\t\t\t\"kwitansi_number\": \"KWT-123-ABC\",\n\t\t\t\"notes\": \"-\"\n\t\t},\n\t\t{\n\t\t\t\"sku\": \"SSI-D00791077-MM-BWH\",\n\t\t\t\"price_buy\": 1000,\n\t\t\t\"price_sale\": 1500,\n\t\t\t\"order_quantity\": 5,\n\t\t\t\"receive_quantity\": 5,\n\t\t\t\"quantity_out\": 0,\n\t\t\t\"kwitansi_number\": \"KWT-123-ABC\",\n\t\t\t\"notes\": \"-\"\n\t\t},\n\t\t{\n\t\t\t\"sku\": \"SSI-D00791091-XL-BWH\",\n\t\t\t\"price_buy\": 1000,\n\t\t\t\"price_sale\": 1500,\n\t\t\t\"order_quantity\": 5,\n\t\t\t\"receive_quantity\": 5,\n\t\t\t\"quantity_out\": 0,\n\t\t\t\"kwitansi_number\": \"KWT-123-ABC\",\n\t\t\t\"notes\": \"-\"\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactions"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List Transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/transactions?trxType=TRX-IN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "trxType",
+							"value": "TRX-IN",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "List Detail a Transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/transactions/detail/TRX-IN-7JT4HX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactions",
+						"detail",
+						"TRX-IN-7JT4HX"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
